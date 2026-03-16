@@ -18,7 +18,27 @@ salarios = {
     2025: 1423500
 }
 
-# Hay dos formas rapidas de rellenar nuestro df con datos de un diccionario
+# 3. DICCIONARIO DE CONFLICTO (Muertes por combate - Fuente: UCDP)
+conflicto = {
+    1990: 501, 1991: 725, 1992: 1479, 1993: 182, 1994: 1123,
+    1995: 823, 1996: 1192, 1997: 560, 1998: 939, 1999: 1374,
+    2000: 1078, 2001: 1864, 2002: 2263, 2003: 730, 2004: 1234,
+    2005: 1389, 2006: 502, 2007: 314, 2008: 219, 2009: 377,
+    2010: 419, 2011: 202, 2012: 211, 2013: 140, 2014: 119,
+    2015: 134, 2016: 30, 2017: 50, 2018: 147, 2019: 132,
+    2020: 28, 2021: 150, 2022: 120, 2023: 110, 2024: 90
+}
+
+# 4. DICCIONARIO DE PRESUPUESTO TOTAL 
+
+presupuesto_total = {
+     2024: 502.6, 2023: 422.8, 2022: 350.4, 2021: 313.9, 2020: 271.7,
+    2019: 258.9, 2018: 235.6, 2017: 224.4, 2016: 215.9, 2015: 216.2,
+    2014: 199.0, 2013: 185.5, 2012: 165.3, 2011: 147.2, 2010: 148.3
+}
+
+
+# Hay dos formas rapidas de rellenar nuestro df con datos de un diccionario (SALARIO MINIMO)
 
 # Forma 1 con .GET
 # -------------------------------------------------
@@ -39,8 +59,36 @@ print("Iniciando carga de datos...")
 
 df['Salario_Minimo_COP'] = df ['anio'].map(salarios)
 
-# Guardamos los datos en el mismo archivo para ir completando
-df.to_csv('data/colombia_macro_annual.csv', index=False)
- 
 print(df.tail())
 print("DF enriquecido exitosamente")
+
+
+# Inyectamos dados de CONFLICTO en nuestro df
+
+print("Cargando datos de conflicto armado")
+df['Muertes_Conflicto'] = df ['anio'].map(conflicto) # creamos columna y con .map() inyectamos datos del diccionario conflicto
+
+# Inyectamos datos de inflacion y PIB para 2024
+
+df.loc[df['anio'] == 2024, 'Crecimiento_PIB_pct'] = 1.6
+df.loc[df['anio'] == 2024, 'Inflacion_Anual_pct'] = 6.77
+# Guardamos los datos en el mismo archivo para ir completando
+
+
+# Inyectamos dados de PRESUPUESTO en nuestro df
+print("Cargando datos del PRESUPUESTO GENERAL")
+df['Presupuesto_Total_COP']= df ['anio'].map(presupuesto_total)
+
+# Vamos a inyectar datos unicos para años determinados, con .loc
+df.loc[df['anio'] == 2025, 'Inflacion_Anual_pct'] = 2.6
+df.loc[df['anio'] == 2025, 'Poblacion'] = 53200000.0
+df.loc[df['anio'] == 2024, 'Gasto_Educacion_pct_Presupuesto'] = 14.0
+
+
+df.to_csv('data/colombia_macro_annual.csv', index=False) # guardamos el df con info de conflicto actualizada
+
+
+print("DF enriquecido exitosamente")
+
+
+

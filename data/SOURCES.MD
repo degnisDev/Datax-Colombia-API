@@ -17,3 +17,12 @@ Este documento registra los orígenes oficiales de la información utilizada en 
 - **Salario Mínimo:** Histórico del Banco de la República (BanRep).
 - **Desempleo:** DANE (Gran Encuesta Integrada de Hogares - GEIH).
 - **Cifras de Conflicto:** Uppsala Conflict Data Program (UCDP).
+
+
+
+#### 2. En [SOURCES.MD](cci:7://file:///d:/devSpace/PROYECTOS/DCG/data/SOURCES.MD:0:0-0:0) (Añade los orígenes reales):
+```markdown
+## 3. Fuentes Locales e Internacionales (Manual)
+- **Salario Mínimo:** Histórico oficial compilado de Decretos Nacionales y BanRep.
+- **Conflicto Armado:** Universidad de Uppsala (UCDP) - Muertes por combate.
+- **Datos 2024:** Proyecciones y cierres preliminares del DANE.

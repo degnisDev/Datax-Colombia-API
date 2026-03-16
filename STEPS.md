@@ -55,3 +55,11 @@ git commit -m "Initial commit: Entorno y script de recolección base"
 ---
 > [!TIP]
 > Mantén siempre activo el entorno virtual (`venv`) antes de correr cualquier script o instalar nuevas librerías.
+
+
+## 6. Enriquecimiento de Datos (Manual/Local)
+Para cubrir vacíos de la API e incluir datos locales (Salario, Conflicto).
+```powershell
+# Comando para inyectar datos manuales y parches
+python scripts/enrich_data.py
+
