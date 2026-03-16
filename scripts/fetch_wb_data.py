@@ -1,5 +1,8 @@
-import pandas as pd 
-import requests
+import pandas as pd     # Permite manejar tablas de datos (DataFrames) como si fuera Excel en código.
+import requests      # Permite viajar a internet y pedir datos a servidores (APIs).
+import os            # Permite hablar con tu sistema operativo (crear carpetas, rutas, etc.).
+
+# ETL - Extract Transform Load
 
 # Esto es lo que le vamos a pedir al banco mundial "Lista de compras"
 # Cada codigo raro (indicador) representa un dato especifico
@@ -7,9 +10,13 @@ import requests
 indicadores = {
     'SP.POP.TOTL': 'Poblacion',
     'NY.GDP.MKTP.KD.ZG': 'Crecimiento_PIB_pct',
-    'MS.MIL.XPND.GD.ZS': 'Gasto_Militar_pct_PIB',
-    'SE.XPD.TOTL.GB.ZS': 'Gasto_Educacion_pct_GastoTotal',
-    'FP.CPI.TOTL.ZG': 'Inflacion_Anual_pct'
+    'GC.XPN.TOTL.CN': 'Presupuesto_Total_COP',
+    # 'MS.MIL.XPND.GD.ZS': 'Gasto_Militar_pct_PIB',
+    'MS.MIL.XPND.ZS': 'Gasto_Militar_pct_Presupuesto',
+    'SE.XPD.TOTL.GB.ZS': 'Gasto_Educacion_pct_Presupuesto',
+    'FP.CPI.TOTL.ZG': 'Inflacion_Anual_pct',
+    'SL.UEM.TOTL.ZS': 'Desempleo_pct_Total',
+    'BX.KLT.DINV.WD.GD.ZS': 'Inversion_Extranjera_pct_PIB'
 }
 
 # Configuracion de la peticion
@@ -17,17 +24,50 @@ PAIS = 'CO' # Colombia
 INICIO = 1990
 FIN = 2025
 
+# Hacemos un Merge ("buscarV") para por medio del año traer el presidente respectivamente
+
+def obtener_presidente(anio):
+    if 1990 <= anio <= 1994:
+        return "César Gaviria"
+    elif 1995 <= anio <= 1998:
+        return "Ernesto Samper"
+    elif 1999 <= anio <= 2002:
+        return "Andrés Pastrana"
+    elif 2003 <= anio <= 2006:
+        return "Álvaro Uribe 1"
+    elif 2007 <= anio <= 2010:
+        return "Álvaro Uribe 2"
+    elif 2011 <= anio <= 2014:
+        return "Juan Manuel Santos 1"
+    elif 2015 <= anio <= 2018:
+        return "Juan Manuel Santos 2"
+    elif 2019 <= anio <= 2022:
+        return "Iván Duque"
+    elif 2023 <= anio <= 2026:
+        return "Gustavo Petro"
+    else:
+        return "Dato no disponible"
+
 def descargar_indicador(codigo, nombre_columna):
     print(f"Descargando {nombre_columna}...")
 
 # Construimos la URL personalizada uniendo las piezas (f-string)
     url = f"https://api.worldbank.org/v2/country/{PAIS}/indicator/{codigo}?date={INICIO}:{FIN}&format=json&per_page=100"
 
-    # El mensajero (request) va a esa direccion y pide 
+
+# -------------------------------------------------------
+# 1 - CONEXION: Llama a la API del Banco Mundial e inicia la peticion.
+# -------------------------------------------------------
+# El mensajero (request) va a esa direccion y hace una peticion
     respuesta = requests.get(url)
 
+
+# -------------------------------------------------------
+# 2 - TRANSFORMACION: Convierte los datos crudos (JSON) en una tabla de Pandas.
+# -------------------------------------------------------
     # El Banco Mundial devuelve una lista: [Metadatos, Datos Reales]
     # Extraemos la lista de datos (esta en la posicion 1 del JSON)
+
     datos_crudos = respuesta.json()[1]
 
     # Pandas convierte esa lista en una tabla (DataFrame)
@@ -42,7 +82,7 @@ def descargar_indicador(codigo, nombre_columna):
     return df
 
 # BUCLE MAESTRO (UNIMOS Todo)
-# 1. Creamos una tabla base vacia con los anos que nos interesan
+# Creamos una tabla base vacia con los anos que nos interesan
 # range (INICIO, FIN +1) nos da la lista de numeros del 1990 al 2024
 df_maestro = pd.DataFrame({'anio': range(INICIO, FIN + 1)})
 
@@ -62,6 +102,35 @@ for cod, nom in indicadores.items():
     # Borramos la columna 'date' (por que ya tenemos anio que es lo mas importante)
     df_maestro = df_maestro.drop(columns=['date'])
 
-#3 Veamos como quedo nuestro trabajo por consola
-print("\n--- !DATOS DESCARGADOS CON EXITO! ---")
-print(df_maestro.head()) # Muestra las 5 primeras filas
+# -------------------------------------------------------
+# 3 - MAPEO: Asigna el Presidente correspondiente a cada año con .apply()
+# -------------------------------------------------------
+# Agregamos presidente a nuestro script usando la columna año con la funcion creada
+
+
+print("Etiquetando presidentes...")
+# .apply es como decirle vete fila por fila y haz esto
+df_maestro['Presidente'] = df_maestro['anio'].apply(obtener_presidente)
+
+
+# -------------------------------------------------------
+# 4 - EXPORTACION: Guarda la tabla final en un archivo CSV físico.
+# -------------------------------------------------------
+# Guardar los datos en un archivo Fisico (CSV)
+
+
+
+# Primero nos aseguramos de que exite la carpeta data
+if not os.path.exists('data'):
+    print("Creando carpeta 'data' para guardar los resultados consultados...")
+    os.makedirs('data')
+
+# Guardamos el archivo
+df_maestro.to_csv('data/colombia_macro_annual.csv', index=False)
+
+
+# -------------------------------------------------------
+# 5 - VISUALIZACION: Muestra un resumen de los datos en la terminal.
+# -------------------------------------------------------
+print("\n--- !DATOS DESCARGADOS Y GUARDADOS CON EXITO! ---")
+print(df_maestro.tail()) # Muestra las últimas 5 filas (Petro/Duque)
