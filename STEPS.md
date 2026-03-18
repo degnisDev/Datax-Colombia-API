@@ -58,8 +58,9 @@ git commit -m "Initial commit: Entorno y script de recolección base"
 
 
 ## 6. Enriquecimiento de Datos (Manual/Local)
-Para cubrir vacíos de la API e incluir datos locales (Salario, Conflicto).
+Para cubrir vacíos de la API e incluir datos locales (Salario Mínimo, Conflicto Armado, Presupuesto General de la Nación e hitos en Educación).
+
 ```powershell
 # Comando para inyectar datos manuales y parches
 python scripts/enrich_data.py
-
+```
