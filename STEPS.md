@@ -64,3 +64,33 @@ Para cubrir vacíos de la API e incluir datos locales (Salario Mínimo, Conflict
 # Comando para inyectar datos manuales y parches
 python scripts/enrich_data.py
 ```
+
+
+<!-- -------------------------------------- -->
+# BACKEND
+<!-- -------------------------------------- -->
+
+---
+
+## 7. Fase 2: Backend (FastAPI)
+Configuración del servidor para exponer los datos a través de una API.
+
+### 7.1. Instalación de Dependencias del Backend
+Instalamos FastAPI y el servidor ASGI (Uvicorn).
+```powershell
+# FastAPI: El framework web
+# Uvicorn: El servidor encargado de ejecutar la app
+pip install fastapi uvicorn
+
+### 7.2. Estructura del Servidor
+Creamos una carpeta dedicada para el backend para mantener el orden.
+mkdir backend
+mkdir backend/app
+
+# 7.3. Primer Servidor (Hola Mundo)
+# --reload permite que el servidor se reinicie al detectar cambios en el código
+uvicorn backend.app.main:app --reload
+
+
+
+
