@@ -81,6 +81,8 @@ Instalamos FastAPI y el servidor ASGI (Uvicorn).
 # FastAPI: El framework web
 # Uvicorn: El servidor encargado de ejecutar la app
 pip install fastapi uvicorn
+# y tambien pandas y request
+pip install pandas requests
 
 ### 7.2. Estructura del Servidor
 Creamos una carpeta dedicada para el backend para mantener el orden.
