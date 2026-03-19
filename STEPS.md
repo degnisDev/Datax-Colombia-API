@@ -89,9 +89,21 @@ Creamos una carpeta dedicada para el backend para mantener el orden.
 mkdir backend
 mkdir backend/app
 
+"""dentro de app creamos un archivo llamado main.py
+En el cual vamos a descargar librerias, formatear la data y crear los Endpoints"""
+
 # 7.3. Primer Servidor (Hola Mundo)
 # --reload permite que el servidor se reinicie al detectar cambios en el código
+
+"""Al ejecutar este comando en consola, veremos nuestra API en vivo mostrando la informacion en elformato que solicitamos """
+
 uvicorn backend.app.main:app --reload
+
+
+# 7.4 ENDPOINTS
+
+Son los puertos por donde vamos a pedir informacion general o especifica de nuestra DB alojada en nuestra API.
+
 
 
 

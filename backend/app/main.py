@@ -33,7 +33,7 @@ class MacroData(BaseModel):
 
 # ----3. RUTAS (ENDPOINTS) ---
 
-# Creamos nuestro primer endpoint (Ruta principal)
+# 1ER endpoint (Ruta principal)
 @app.get("/")
 def read_root():
     return {
@@ -41,12 +41,41 @@ def read_root():
         "estado": "Carga de datos exitosa",
         "columnas_detectadas": list(df.columns)
     }
+
+
+# 2DO endpoint (Toda la data)
 @app.get("/data", response_model=List[MacroData])
 def get_all_data():
     # Convertimos el DataFrame de Pandas a una lista de diccionarios (JSON)
     return df.to_dict(orient="records")
 
+# 3ER endpoint (Filtro por años)
+@app.get("/data/{item_anio}")
+def get_year_data(item_anio: int):
+    """busca los datos de un año especifico"""
+    # Filtramos el DataFrame usando año
+    resultado = df[df['anio']== item_anio]
+
+    # Si no encuentra nada, devolvemos un mensaje de error
+    if resultado.empty:
+        return {"error": "Año no encontrado en nuestra Bade de datos"}
+    
+    # Si lo encuentra, lo convertimos en un diccionario para que sea un JSON
+    return resultado.to_dict(orient="records")[0]
 
 
+# 4TO endpoint (Filtro por Presidente)
+@app.get("/data/presidente/{nombre}")
+def get_presidente_data(nombre: str):
+    """Filtra todos los años gobernados por un presidente en especifico"""
+    # Usamos .str.contrains para que busque si el nombre coincide parcialmente
+    # case=False, na=False el primero desactiva el case sentive y el segundo omite los N/A
+    resultado = df[df['Presidente'].str.contains(nombre, case=False, na=False)]
+
+    if resultado.empty:
+        return {"error": f"No se encontraron registros para el presidente: {nombre}"}
+
+    # Aqui no ponemos el [0] por que un presidente goberno varios años y los queremos todos
+    return resultado.to_dict(orient="records")
 
 
