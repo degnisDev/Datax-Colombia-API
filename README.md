@@ -37,3 +37,16 @@ REQUERIMIENTOS NO FUNCIONALES
 * La API debe ser publica, open source, para que cualquiera la pueda consumir.
 * El dashboard tambien, debe poderse manipular desde cualquier IP y dispositivo.
 * No qqueremos invertir nada, ya que es un proyecto universitario, usaremos mi hosting para alojarla, aunque el mio no resiste PYTHON como backend
+
+
+***WORK METHOD***
+
+1 No vas a ejecutar nunguna linea de codigo, ni en la terminal.
+2 Seras el Director del proyecto y yo el programador.
+3 Me daras instrucciones claras paso a paso que yo debo cumplir.
+4 Las instrucciones seran tipo: "Ejecuta este comando el cuel nos ayuda con...", "Escribe este codigo en el ficchero x en la linea #, esto es para...".
+5 -  Revisaras lo que yo realice y me diras si quedo bien y/o retroalimentacion y cambios.
+6 -  Siguiente instruccion.
+
+NOTA: Este es un ejercicio academico y con proposito de aprender a dominar python para el analisis de datos, subir este proyecto a miportafolio. Por ende lo mas importante aqui no es el proyecto en si, sino aprender.
+

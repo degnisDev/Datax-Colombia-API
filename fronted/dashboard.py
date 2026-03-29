@@ -4,5 +4,7 @@ import pandas as pd
 
 
 # 1. Configuracion de la pagina
-st
+st.set_page_config(page_title="CGD Dashboard", layout="wide")
+st.tittle("CD CGD: Colombian Government Data Dashboard")
+st.sidebar.header("Filtros del Proyecto")
 

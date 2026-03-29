@@ -1,0 +1,12 @@
+Requerimientos Dashboard:
+
+1- Imagen potente de entrada, el hook, que sera la imagen del presidente Petro (a la izquierda) y  Uribe (a la derecha) en el centro, 
+que han sido los mas representativos de los ultimos 30 anos y alrededor los demas, donde su importancia o prevalencia sera dada de acuerdo a cuando fueron presidentes, de modo que el primero o mas antiguo estara al fondo.
+Esta imagen sera lo primero que veran los que ingresen a la "pagina" por 3 segundos y luego se difumina para quedar como background y pasan a tomar el protagonismo, los siguientes:
+2 - Panel General: el cual tendra metricas de los 9 presidentes en los mismos paneles... es decir y por ejemplo, un grafico de barras para inversion en educacion, donde se vea cara presidente con su color y miniatura.
+3 - Panel presidente: (puede ser una segmentacion) en la parte superior, en donde el usuario seleccione en que presidente se quiere enfocar, al hacer clic: a ese presidente con sus principales Insights, 
+con la imagen de ese presidente en el centro del tablero, o arriba, en el centro del panel tendremos el pilar mas importante que es el de economia. los demas estaran a los costados..
+4 - Panel comparativo, donde se puedan comparar los resultados de x vs y presidente.
+
+
+Debemos integrar los graficos mas adecuados para cada tipo de medida y escenario.
