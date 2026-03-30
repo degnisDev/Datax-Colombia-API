@@ -1,10 +1,161 @@
 import streamlit as st
 import requests
 import pandas as pd 
+import plotly.express as px
+import plotly.graph_objects as go
 
 
-# 1. Configuracion de la pagina
-st.set_page_config(page_title="CGD Dashboard", layout="wide")
-st.tittle("CD CGD: Colombian Government Data Dashboard")
-st.sidebar.header("Filtros del Proyecto")
+# 1. CONFIGURACION DE LA PAGINA
+# ====================================
+
+st.set_page_config(
+    page_title="CGD | Colombian Government Data",
+    page_icon="CO",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# 2. CARGA DE DATOS DESDE LA API LOCAL
+# =====================================
+
+API_URL = "http://127.0.0.1:8000"
+
+@st.cache_data
+def load_data():
+    """Carga todos los datos desde nuestra API FastAPI."""
+    try:
+        response = requests.get(f"{API_URL}/data")
+        response.raise_for_status()
+        df = pd.DataFrame(response.json())
+        return df
+    except requests.exceptions.ConnectionError:
+        st.error("⚠️ No se puede conectar a la API. Asegúrese de que el servidor FastAPI esté corriendo.")
+        return pd.DataFrame()
+
+df = load_data()
+
+
+# 3. SIDEBAR - FILTROS
+# ======================================
+
+
+st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/200px-Flag_of_Colombia.svg.png", width=80)
+st.sidebar.title("co CGD Dashboard")
+st.sidebar.markdown("**Colombia Government Data**")
+st.sidebar.divider()
+
+# 4. NAVEGACION (PANELES)
+# =====================================
+
+panel = st.sidebar.radio(
+    " Selecciona un Panel",
+    options=["🌍 Panel General","🧓🏻 Panel Presidente","⚖️ Panel Comparativo"],
+    index=0
+)
+
+# ===============================================
+# MAPA DE COLORES POR PRESIDENTE
+# Cada presidente tendra su propio color en todas las graficas
+
+COLOR_MAP = {
+    "César Gaviria":        "#3498DB",   # Azul
+    "Ernesto Samper":       "#E74C3C",   # Rojo
+    "Andrés Pastrana":      "#2ECC71",   # Verde
+    "Álvaro Uribe 1":       "#F39C12",   # Naranja
+    "Álvaro Uribe 2":       "#E67E22",   # Naranja oscuro (mismo partido)
+    "Juan Manuel Santos 1": "#9B59B6",   # Morado
+    "Juan Manuel Santos 2": "#7D3C98",   # Morado oscuro (segundo periodo)
+    "Iván Duque":           "#1ABC9C",   # Verde agua
+    "Gustavo Petro":        "#C0392B",   # Rojo oscuro
+}
+
+# 5. RENDERIZADO POR PANEL
+# ====================================
+
+# Si la API no devolvio datos, detenemos la app aqui
+if df.empty:
+    st.stop()
+
+# ================= PANEL GENERAL ====================
+if panel == "🌍 Panel General":
+
+    st.title("Panel General - Todos los Presidentes")
+    st.markdown("Vision historica completa de colombia desde **1990 hasta 2025**.")
+    st.divider()
+
+    # --- FILA DE KPIS (metricas de resumen) ----
+    # st.columns() divide la pantalla en columnas iguales
+    col1, col2, col3 = st.columns(4)
+
+
+    # calculamos el promedio de cada indicador clave en todo el periodo
+    col1.metric("PIB Promedio", f"{df['Crecimiento_PIB_pct'].mean():.1f}%")
+    col2.metric("Inflacion Promedio", f"{df['Inflacion_Anual_pct'].mean():.1f}%")
+    col2.metric("Desempleo Promedio", f"{df['Desempleo_pct_Total'].mean():.1f}%")
+    col2.metric("Total Muertes Conflicto", f"{df['Muertes_Conflicto'].mean():.1f}%")
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# if df.empty:
+#     st.stop()
+
+# if panel == "🌍 Panel General":
+#     st.title("Panel General - Todos los Presidentes")
+#     st.markdown("Vision historica completa de colombia desde **1990 hasta 2025**.")
+
+# elif panel == "🧓🏻 Panel Presidente":
+#     st.title("🧓🏻 Panel Presidente")
+#     st.markdown("Analisis detallado por presidente")
+
+# elif panel == "⚖️ Panel Comparativo":
+#     st.title("⚖️ Panel Comparativo")
+#     st.markdown("Compara el desempeño entre dos presidentes")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
