@@ -94,8 +94,40 @@ if panel == "🌍 Panel General":
     col2.metric("Desempleo Promedio", f"{df['Desempleo_pct_Total'].mean():.1f}%")
     col2.metric("Total Muertes Conflicto", f"{df['Muertes_Conflicto'].mean():.1f}%")
 
+    st.divider()
 
-    
+    # --------------- GRAFICA #1 --------------------
+ # px.bar crea un gráfico de barras interactivo
+    # x = eje horizontal (años), y = eje vertical (valor), color = colorea por presidente
+    # color_discrete_map aplica nuestro mapa de colores personalizado
+    fig_pib = px.bar(
+        df,
+        x="anio",
+        y="Crecimiento_PIB_pct",
+        color="Presidente",
+        color_discrete_map=COLOR_MAP,
+        title="Crecimiento del PIB (%) por año y presidente",
+        labels={"anio": "Año", "Crecimiento_PIB_pct": "Crecimiento PIB (%)"},
+        text_auto=".1f"
+    )
+
+# Anadimos una linea horizontal en cero para ver facilmente los negativos
+fig_pib.add_hline(y=0, line_dash="dash", line_color="white", opacity=0.5)
+fig_pib.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)")
+st.plotly_chart(fig_pib, use_container_with=True) #  use_container_with=True = ocupa todo el ancho
+
+# --- FILA CON 2 GRAficas LADO A LADO ---
+col_a, col_b = st.columns(2)
+
+
+
+
+
+
+
+
+
+
 
 
 
