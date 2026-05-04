@@ -47,6 +47,7 @@ REQUERIMIENTOS NO FUNCIONALES
 4 Las instrucciones seran tipo: "Ejecuta este comando el cuel nos ayuda con...", "Escribe este codigo en el ficchero x en la linea #, esto es para...".
 5 -  Revisaras lo que yo realice y me diras si quedo bien y/o retroalimentacion y cambios.
 6 -  Siguiente instruccion.
+7 - Ejecuta codigo tu mismo, solo bajo instruccion y autorizacion especifica.
 
 NOTA: Este es un ejercicio academico y con proposito de aprender a dominar python para el analisis de datos, subir este proyecto a miportafolio. Por ende lo mas importante aqui no es el proyecto en si, sino aprender.
 
