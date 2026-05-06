@@ -1,0 +1,40 @@
+:root {
+  /* Paleta Colombia Dark Mode */
+  --colombia-yellow: #FDD835;
+  --colombia-blue: #1A237E;
+  --colombia-red: #C62828;
+  
+  /* Fondos y Textos */
+  --bg-dark: #0A0E1A;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+  --text-primary: #E8EAF6;
+  --text-muted: #90A4AE;
+  
+  /* Efectos y bordes */
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --shadow-neon-yellow: 0 0 15px rgba(253, 216, 53, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Utilidad para Glassmorphism */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+}

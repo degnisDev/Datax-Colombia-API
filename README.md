@@ -16,6 +16,13 @@ Nuestro modelo de evaluación se basa en cuatro ejes fundamentales:
 - **Dashboard V1:** Streamlit (Python) para visualización interactiva.
 - **AI:** Análisis dinámico de resultados mediante LLMs.
 
+## 🛠️ Tecnologías Utilizadas
+- **Frontend:** React 18 + Vite (SPA de alto rendimiento).
+- **Backend:** FastAPI (Python) - API REST para entrega de datos.
+- **Gráficas:** Recharts (Librería de React para visualización de datos premium).
+- **Estilos:** Vanilla CSS (Moderno, con Glassmorphism y Paleta Colombia).
+- **Despliegue:** Vercel (Frontend) & Render.com (Backend).
+
 ---
 *Proyecto desarrollado por Degnis Dev - [degnisdev.com](https://degnisdev.com/)*
 
