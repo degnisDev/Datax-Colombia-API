@@ -1,0 +1,38 @@
+# ===========================
+# CGD — Colombia Government Data
+# ===========================
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Env / Secrets
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
