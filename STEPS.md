@@ -202,8 +202,7 @@ Luego abre `http://localhost:5173` en tu navegador. ¡Listo!
 
 
 **Terminal 3 — Commits (Git):**
-```powershell
-cd d:\devSpace\PROYECTOS\CGD\frontend
-npm run dev
+```git add .
+    git commit -m
 ```
 

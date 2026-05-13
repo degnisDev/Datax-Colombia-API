@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Inicio from './pages/Inicio';
 import General from './pages/General';
 import Presidente from './pages/Presidente';
+import Comparativo from './pages/Comparativo';
 
 
 
@@ -33,7 +34,7 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/general" element={<General />} />
           <Route path="/presidente" element={<Presidente />} />
-          <Route path="/comparativo" element={<h1>Comparativo</h1>} />
+          <Route path="/comparativo" element={<Comparativo />} />
         </Routes>
       </main>
     </Router>
