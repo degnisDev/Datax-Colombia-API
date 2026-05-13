@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Inicio from './pages/Inicio';
+import General from './pages/General';
+import Presidente from './pages/Presidente';
+
 
 
 function App() {
@@ -25,11 +28,11 @@ function App() {
       </nav>
 
       {/* Contenedor Principal Centrado */}
-      <main style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <main style={{ minHeight: '80vh' }}>
         <Routes>
           <Route path="/" element={<Inicio />} />
-          <Route path="/general" element={<h1>Dashboard General</h1>} />
-          <Route path="/presidente" element={<h1>Gestión por Presidente</h1>} />
+          <Route path="/general" element={<General />} />
+          <Route path="/presidente" element={<Presidente />} />
           <Route path="/comparativo" element={<h1>Comparativo</h1>} />
         </Routes>
       </main>

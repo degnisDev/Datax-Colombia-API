@@ -81,29 +81,129 @@ Instalamos FastAPI y el servidor ASGI (Uvicorn).
 # FastAPI: El framework web
 # Uvicorn: El servidor encargado de ejecutar la app
 pip install fastapi uvicorn
-# y tambien pandas y request
+
+# Pandas y Requests (si no los tienes aún)
 pip install pandas requests
+```
 
 ### 7.2. Estructura del Servidor
 Creamos una carpeta dedicada para el backend para mantener el orden.
+```powershell
 mkdir backend
 mkdir backend/app
+```
+Dentro de `backend/app/` creamos el archivo `main.py`, que contiene:
+- Importación de librerías (FastAPI, Pandas)
+- Carga del CSV en memoria
+- Configuración de CORS (permisos para que el Frontend se conecte)
+- Definición de los Endpoints
 
-"""dentro de app creamos un archivo llamado main.py
-En el cual vamos a descargar librerias, formatear la data y crear los Endpoints"""
+### 7.3. Levantar el Backend
+```powershell
+# 1. Asegúrate de estar en la RAÍZ del proyecto
+cd d:\devSpace\PROYECTOS\CGD
 
-# 7.3. Primer Servidor (Hola Mundo)
-# --reload permite que el servidor se reinicie al detectar cambios en el código
+# 2. Activa el entorno virtual
+.\venv\Scripts\activate
 
-"""Al ejecutar este comando en consola, veremos nuestra API en vivo mostrando la informacion en elformato que solicitamos """
-
+# 3. Ejecuta el servidor (--reload reinicia al detectar cambios)
 uvicorn backend.app.main:app --reload
+```
+> [!IMPORTANT]
+> Si todo salió bien, verás: `INFO: Uvicorn running on http://127.0.0.1:8000`
+> Puedes verificar abriendo `http://127.0.0.1:8000` en tu navegador.
+
+### 7.4. Endpoints Disponibles
+Son las rutas por donde pedimos información a nuestra API:
+
+| Ruta | Descripción | Ejemplo |
+|------|-------------|---------|
+| `GET /` | Mensaje de bienvenida y columnas detectadas | `http://127.0.0.1:8000/` |
+| `GET /data` | Todos los datos del CSV (todos los años) | `http://127.0.0.1:8000/data` |
+| `GET /data/{año}` | Datos de un año específico | `http://127.0.0.1:8000/data/2020` |
+| `GET /data/presidente/{nombre}` | Datos filtrados por presidente | `http://127.0.0.1:8000/data/presidente/Petro` |
+
+---
+
+<!-- -------------------------------------- -->
+# FRONTEND
+<!-- -------------------------------------- -->
+
+---
+
+## 8. Fase 3: Frontend (React + Vite)
+Interfaz web profesional que consume los datos del Backend.
+
+### 8.1. Instalación del Frontend
+```powershell
+# Desde la raíz del proyecto, crear la app React con Vite
+npx -y create-vite@latest frontend -- --template react
+
+# Entrar a la carpeta e instalar dependencias
+cd frontend
+npm install
+
+# Instalar dependencias adicionales del proyecto
+npm install react-router-dom recharts lucide-react
+```
+
+### 8.2. Levantar el Frontend
+```powershell
+# 1. Entra a la carpeta del frontend
+cd d:\devSpace\PROYECTOS\CGD\frontend
+
+# 2. Ejecuta el servidor de desarrollo
+npm run dev
+```
+> [!IMPORTANT]
+> Si todo salió bien, verás: `Local: http://localhost:5173/`
+> Abre esa URL en tu navegador para ver el Dashboard.
+
+### 8.3. Estructura de Archivos del Frontend
+```
+frontend/
+├── public/
+│   ├── presidents/          # Fotos reales de los presidentes
+│   └── hero_presidents.png  # Imagen épica de portada (generada por IA)
+├── src/
+│   ├── pages/
+│   │   ├── Inicio.jsx       # Sección 1: Portada con hero image
+│   │   ├── Inicio.css
+│   │   ├── General.jsx      # Sección 2: Dashboard de KPIs
+│   │   └── General.css
+│   ├── App.jsx              # Router principal + Navbar
+│   ├── App.css
+│   ├── index.css            # Estilos globales (paleta Colombia, glassmorphism)
+│   └── main.jsx             # Punto de entrada de React
+└── package.json
+```
+
+---
+
+## 🚀 INICIO RÁPIDO (Levantar Todo el Proyecto)
+
+> [!TIP]
+> Necesitas **2 terminales** abiertas simultáneamente.
+
+**Terminal 1 — Backend (API de datos):**
+```powershell
+cd d:\devSpace\PROYECTOS\CGD
+.\venv\Scripts\activate
+uvicorn backend.app.main:app --reload
+```
+
+**Terminal 2 — Frontend (Interfaz web):**
+```powershell
+cd d:\devSpace\PROYECTOS\CGD\frontend
+npm run dev
+```
+
+Luego abre `http://localhost:5173` en tu navegador. ¡Listo!
 
 
-# 7.4 ENDPOINTS
-
-Son los puertos por donde vamos a pedir informacion general o especifica de nuestra DB alojada en nuestra API.
-
-
-
+**Terminal 3 — Commits (Git):**
+```powershell
+cd d:\devSpace\PROYECTOS\CGD\frontend
+npm run dev
+```
 
