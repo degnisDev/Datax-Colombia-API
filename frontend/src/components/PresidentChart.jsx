@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 import {
     BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
 } from 'recharts';
@@ -80,7 +81,7 @@ export default function PresidentChart({ indicador, indicadorLabel }) {
     const [activePresident, setActivePresident] = useState(null);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/data/chart?indicador=${indicador}`)
+        fetch(`${API_BASE_URL}/data/chart?indicador=${indicador}`)
             .then(res => res.json())
             .then(json => {
                 setChartData(json.data);
@@ -102,8 +103,8 @@ export default function PresidentChart({ indicador, indicadorLabel }) {
 
     return (
         <div>
-            <h3 style={{ color: 'var(--colombia-yellow)', textAlign: 'center', marginBottom: 8, fontSize: '1.1rem' }}>
-                📊 {indicadorLabel} — Evolución Histórica (1990–2025)
+            <h3 style={{ color: 'var(--colombia-yellow)', textAlign: 'center', marginTop: 20, marginBottom: 40, fontSize: '1.2rem' }}>
+                {indicadorLabel} — Evolución Histórica (1990–2025)
             </h3>
 
             <ResponsiveContainer width="100%" height={380}>

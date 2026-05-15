@@ -4,6 +4,7 @@ import {
     ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, CartesianGrid
 } from 'recharts';
 import './Comparativo.css';
+import API_BASE_URL from '../config';
 
 /* ════════════════════════════════════════════
    CONFIGURACIÓN
@@ -22,15 +23,15 @@ const PRESIDENTS = [
 ];
 
 const KPI_CONFIG = [
-    { key: 'Crecimiento_PIB_pct', label: 'PIB', unit: '%', icon: '📈', chartType: 'line', higherIsBetter: true },
-    { key: 'Presupuesto_Total_COP', label: 'Presupuesto', unit: 'B', icon: '🏛️', chartType: 'bar', higherIsBetter: true },
-    { key: 'Gasto_Militar_pct_Presupuesto', label: 'Gasto Militar', unit: '%', icon: '⚔️', chartType: 'bar', higherIsBetter: null },
-    { key: 'Gasto_Educacion_pct_Presupuesto', label: 'Educación', unit: '%', icon: '📚', chartType: 'bar', higherIsBetter: true },
-    { key: 'Inflacion_Anual_pct', label: 'Inflación', unit: '%', icon: '💸', chartType: 'line', higherIsBetter: false },
-    { key: 'Desempleo_pct_Total', label: 'Desempleo', unit: '%', icon: '👥', chartType: 'line', higherIsBetter: false },
-    { key: 'Inversion_Extranjera_pct_PIB', label: 'Inv. Extranjera', unit: '%', icon: '🌍', chartType: 'line', higherIsBetter: true },
-    { key: 'Salario_Minimo_COP', label: 'Salario Mínimo', unit: 'COP', icon: '💰', chartType: 'bar', higherIsBetter: true },
-    { key: 'Muertes_Conflicto', label: 'Conflicto', unit: '', icon: '🕊️', chartType: 'line', higherIsBetter: false },
+    { key: 'Crecimiento_PIB_pct', label: 'PIB', unit: '%', icon: '', chartType: 'line', higherIsBetter: true },
+    { key: 'Presupuesto_Total_COP', label: 'Presupuesto', unit: 'B', icon: '', chartType: 'bar', higherIsBetter: true },
+    { key: 'Gasto_Militar_pct_Presupuesto', label: 'Gasto Militar', unit: '%', icon: '', chartType: 'bar', higherIsBetter: null },
+    { key: 'Gasto_Educacion_pct_Presupuesto', label: 'Educación', unit: '%', icon: '', chartType: 'bar', higherIsBetter: true },
+    { key: 'Inflacion_Anual_pct', label: 'Inflación', unit: '%', icon: '', chartType: 'line', higherIsBetter: false },
+    { key: 'Desempleo_pct_Total', label: 'Desempleo', unit: '%', icon: '', chartType: 'line', higherIsBetter: false },
+    { key: 'Inversion_Extranjera_pct_PIB', label: 'Inv. Extranjera', unit: '%', icon: '', chartType: 'line', higherIsBetter: true },
+    { key: 'Salario_Minimo_COP', label: 'Salario Mínimo', unit: 'COP', icon: '', chartType: 'bar', higherIsBetter: true },
+    { key: 'Muertes_Conflicto', label: 'Conflicto', unit: '', icon: '', chartType: 'line', higherIsBetter: false },
 ];
 
 /* ════════════════════════════════════════════
@@ -258,7 +259,7 @@ export default function Comparativo() {
     const bannerRef = useRef(null);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/data')
+        fetch(`${API_BASE_URL}/data`)
             .then(res => res.json())
             .then(json => { setData(json); setLoading(false); })
             .catch(() => { setError(true); setLoading(false); });

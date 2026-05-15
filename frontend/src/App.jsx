@@ -1,35 +1,32 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import './App.css';
 
 import Inicio from './pages/Inicio';
 import General from './pages/General';
 import Presidente from './pages/Presidente';
 import Comparativo from './pages/Comparativo';
 
-
-
 function App() {
   return (
     <Router>
       {/* Navbar Premium con Glassmorphism */}
-      <nav className="glass-panel" style={{
-        margin: '20px auto',
-        maxWidth: '800px',
-        padding: '15px 30px',
-        display: 'flex',
-        gap: '30px',
-        justifyContent: 'center',
-        position: 'sticky',
-        top: '20px',
-        zIndex: 100
-      }}>
-        <Link to="/" style={{ color: 'var(--colombia-yellow)', textDecoration: 'none', fontWeight: '800', letterSpacing: '1px' }}>INICIO</Link>
-        <Link to="/general" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.9rem' }}>GENERAL</Link>
-        <Link to="/presidente" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.9rem' }}>PRESIDENTE</Link>
-        <Link to="/comparativo" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.9rem' }}>COMPARATIVO</Link>
+      <nav className="glass-panel main-navbar">
+        <NavLink to="/" className={({ isActive }) => `nav-link logo-link ${isActive ? 'active' : ''}`}>
+          INICIO
+        </NavLink>
+        <NavLink to="/general" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          GENERAL
+        </NavLink>
+        <NavLink to="/presidente" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          PRESIDENTE
+        </NavLink>
+        <NavLink to="/comparativo" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          COMPARATIVO
+        </NavLink>
       </nav>
 
       {/* Contenedor Principal Centrado */}
-      <main style={{ minHeight: '80vh' }}>
+      <main className="app-main-content">
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/general" element={<General />} />
@@ -37,6 +34,13 @@ function App() {
           <Route path="/comparativo" element={<Comparativo />} />
         </Routes>
       </main>
+
+      {/* Footer de Autor */}
+      <footer className="author-footer">
+        <p>Developed by <span className="author-name">degnisDev</span></p>
+        <p className="copyright">All Rights Reserved</p>
+        <a href="https://degnisdev.com" target="_blank" rel="noopener noreferrer" className="author-link">degnisdev.com</a>
+      </footer>
     </Router>
   );
 }

@@ -31,3 +31,77 @@
   pointer-events: none;
 }
 
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.inicio-title {
+  opacity: 0;
+  animation: fadeInScale 1s ease-out forwards;
+  animation-delay: 3.5s;
+}
+
+.inicio-subtitle {
+  opacity: 0;
+  animation: fadeInScale 1s ease-out forwards;
+  animation-delay: 4.5s;
+  /* Fondo oscuro con desenfoque para legibilidad */
+  background: rgba(10, 14, 26, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ════════════════════════════════
+   TICKER (Wall Street Marquee)
+   ════════════════════════════════ */
+.ticker-container {
+  position: fixed;
+  bottom: 10%; /* Ajuste para que quede en la zona inferior de los presidentes */
+  left: 0;
+  width: 100vw;
+  overflow: hidden;
+  background: rgba(10, 14, 26, 0.5); /* Fondo sutil para legibilidad */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 0;
+  z-index: 5;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+@keyframes tickerMoveRight {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: fit-content; /* Necesario para que flex no encoja los items */
+  animation: tickerMoveRight 30s linear infinite;
+}
+
+.ticker-item {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  white-space: nowrap;
+  padding: 0 40px;
+  text-shadow: 0 0 10px currentColor; /* Resplandor usando su propio color */
+  position: relative;
+}
+
+/* Separador entre palabras */
+.ticker-item::after {
+  content: '•';
+  position: absolute;
+  right: -5px;
+  color: rgba(255, 255, 255, 0.3);
+  text-shadow: none;
+}

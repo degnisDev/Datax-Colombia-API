@@ -1,0 +1,115 @@
+.main-navbar {
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 12px 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-navbar:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: var(--colombia-yellow);
+  background: rgba(253, 216, 53, 0.1);
+  box-shadow: inset 0 0 10px rgba(253, 216, 53, 0.1);
+}
+
+.nav-link.logo-link {
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.nav-link.logo-link.active {
+  color: var(--colombia-yellow);
+  background: none;
+  box-shadow: none;
+}
+
+/* Contenedor de las rutas */
+.app-main-content {
+  min-height: 85vh;
+  padding-bottom: 60px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 600px) {
+  .main-navbar {
+    width: 95%;
+    gap: 5px;
+    padding: 10px;
+    font-size: 0.7rem;
+  }
+  .nav-link {
+    padding: 6px 10px;
+    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+  }
+}
+
+/* FIRMA DE AUTOR (FOOTER) */
+.author-footer {
+  text-align: center;
+  padding: 60px 0 30px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  line-height: 1.6;
+}
+
+.author-footer:hover {
+  opacity: 1;
+}
+
+.author-name {
+  color: #00ff90; /* Verde Neón solicitado */
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(0, 255, 144, 0.3);
+}
+
+.copyright {
+  font-size: 0.65rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.author-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.author-link:hover {
+  color: #00ff90;
+  text-decoration: underline;
+}
+

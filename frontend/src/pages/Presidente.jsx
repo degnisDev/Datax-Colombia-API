@@ -4,6 +4,7 @@ import {
     PieChart, Pie, Cell, ResponsiveContainer, XAxis, Tooltip
 } from 'recharts';
 import './Presidente.css';
+import API_BASE_URL from '../config';
 
 /* ════════════════════════════════════════════
    CONFIGURACIÓN
@@ -22,15 +23,15 @@ const PRESIDENTS = [
 ];
 
 const KPI_CONFIG = [
-    { key: 'Crecimiento_PIB_pct', label: 'PIB', unit: '%', icon: '📈', chartType: 'line', higherIsBetter: true },
-    { key: 'Presupuesto_Total_COP', label: 'Presupuesto', unit: 'B', icon: '🏛️', chartType: 'bar', higherIsBetter: true },
-    { key: 'Gasto_Militar_pct_Presupuesto', label: 'Gasto Militar', unit: '%', icon: '⚔️', chartType: 'donut', higherIsBetter: null },
-    { key: 'Gasto_Educacion_pct_Presupuesto', label: 'Educación', unit: '%', icon: '📚', chartType: 'donut', higherIsBetter: true },
-    { key: 'Inflacion_Anual_pct', label: 'Inflación', unit: '%', icon: '💸', chartType: 'line', higherIsBetter: false },
-    { key: 'Desempleo_pct_Total', label: 'Desempleo', unit: '%', icon: '👥', chartType: 'line', higherIsBetter: false },
-    { key: 'Inversion_Extranjera_pct_PIB', label: 'Inv. Extranjera', unit: '%', icon: '🌍', chartType: 'line', higherIsBetter: true },
-    { key: 'Salario_Minimo_COP', label: 'Salario Mínimo', unit: 'COP', icon: '💰', chartType: 'bar', higherIsBetter: true },
-    { key: 'Muertes_Conflicto', label: 'Conflicto', unit: '', icon: '🕊️', chartType: 'area', higherIsBetter: false },
+    { key: 'Crecimiento_PIB_pct', label: 'PIB', unit: '%', icon: '', chartType: 'line', higherIsBetter: true },
+    { key: 'Presupuesto_Total_COP', label: 'Presupuesto', unit: 'B', icon: '', chartType: 'bar', higherIsBetter: true },
+    { key: 'Gasto_Militar_pct_Presupuesto', label: 'Gasto Militar', unit: '%', icon: '', chartType: 'donut', higherIsBetter: null },
+    { key: 'Gasto_Educacion_pct_Presupuesto', label: 'Educación', unit: '%', icon: '', chartType: 'donut', higherIsBetter: true },
+    { key: 'Inflacion_Anual_pct', label: 'Inflación', unit: '%', icon: '', chartType: 'line', higherIsBetter: false },
+    { key: 'Desempleo_pct_Total', label: 'Desempleo', unit: '%', icon: '', chartType: 'line', higherIsBetter: false },
+    { key: 'Inversion_Extranjera_pct_PIB', label: 'Inv. Extranjera', unit: '%', icon: '', chartType: 'line', higherIsBetter: true },
+    { key: 'Salario_Minimo_COP', label: 'Salario Mínimo', unit: 'COP', icon: '', chartType: 'bar', higherIsBetter: true },
+    { key: 'Muertes_Conflicto', label: 'Conflicto', unit: '', icon: '', chartType: 'area', higherIsBetter: false },
 ];
 
 /* ════════════════════════════════════════════
@@ -192,7 +193,7 @@ export default function Presidente() {
 
     // Fetch data
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/data')
+        fetch(`${API_BASE_URL}/data`)
             .then(res => res.json())
             .then(json => { setData(json); setLoading(false); })
             .catch(() => { setError(true); setLoading(false); });
@@ -232,7 +233,7 @@ export default function Presidente() {
 
     if (error) return (
         <div className="loading-screen">
-            <p style={{ color: 'var(--colombia-red)' }}>⚠️ No se pudo conectar con la API.</p>
+            <p style={{ color: 'var(--colombia-red)' }}>No se pudo conectar con la API.</p>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Asegúrate de que el backend FastAPI esté corriendo en el puerto 8000.</p>
         </div>
     );
@@ -250,7 +251,7 @@ export default function Presidente() {
             <div className="presidente-container">
                 {/* Header */}
                 <header className="dashboard-header presidente-header">
-                    <span className="dashboard-badge">🇨🇴 1990 — 2025</span>
+                    <span className="dashboard-badge">1990 — 2025</span>
                     <h1 className="glow-text">GESTIÓN POR PRESIDENTE</h1>
                     <p className="dashboard-subtitle">
                         {selectedPres
@@ -285,7 +286,7 @@ export default function Presidente() {
                 </div>
 
                 {/* Panel de Indicadores (solo si hay selección) */}
-                {selectedPres && (
+                {selectedPres ? (
                     <div style={accentStyle}>
                         {/* Hero Banner */}
                         <div className="president-hero" style={{
@@ -314,8 +315,40 @@ export default function Presidente() {
                             ))}
                         </div>
                     </div>
+                ) : (
+                    <div className="empty-state-wrapper" style={{ marginTop: '100px' }}>
+                        <div className="pulse-ring"></div>
+                        <h2 className="empty-state-title" style={{ fontSize: '3.5rem', letterSpacing: '8px' }}>CONOCE TU HISTORIA</h2>
+                        <p className="empty-state-text" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
+                            Selecciona un mandatario arriba para desglosar los indicadores de su gestión
+                        </p>
+                    </div>
                 )}
+            </div>
+
+            {/* Marquee Ticker al final */}
+            <div className="ticker-container" style={{ position: 'relative', marginTop: '120px', background: 'transparent', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="ticker-track">
+                    {[...aspectos_ticker, ...aspectos_ticker].map((asp, idx) => (
+                        <div key={idx} className="ticker-item" style={{ color: asp.color }}>
+                            {asp.name}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
 }
+
+const aspectos_ticker = [
+    { name: "PIB", color: "var(--colombia-yellow)" },
+    { name: "Inflación", color: "var(--colombia-blue)" },
+    { name: "Presupuesto", color: "var(--colombia-red)" },
+    { name: "Gasto Militar", color: "var(--colombia-yellow)" },
+    { name: "Educación", color: "var(--colombia-blue)" },
+    { name: "Desempleo", color: "var(--colombia-red)" },
+    { name: "Inv. Extranjera", color: "var(--colombia-yellow)" },
+    { name: "Salario Mínimo", color: "var(--colombia-blue)" },
+    { name: "Conflicto", color: "var(--colombia-red)" }
+];
+
