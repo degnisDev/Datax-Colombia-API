@@ -342,32 +342,36 @@ export default function Comparativo() {
                 </header>
 
                 {/* ── GRID HORIZONTAL DE PRESIDENTES ── */}
-                <div className="pres-selector-row">
-                    {PRESIDENTS.map((pres, idx) => {
-                        const isSelected = selectedKeys.includes(pres.key);
-                        const selIndex = selectedKeys.indexOf(pres.key); // 0 o 1
-                        const isDimmed = hasTwoSelected && !isSelected;
-                        const isBlocked = !isSelected && selectedKeys.length === 2;
-                        return (
-                            <div
-                                key={pres.key}
-                                className={`pres-mini-card ${isSelected ? 'pres-selected' : ''} ${isDimmed ? 'pres-dimmed' : ''} ${isBlocked ? 'pres-blocked' : ''}`}
-                                style={{ '--card-color': pres.color, '--card-glow': pres.color + '30' }}
-                                onClick={() => handlePresidentClick(pres.key)}
-                                title={isBlocked ? 'Deselecciona un presidente primero' : pres.displayName}
-                            >
-                                {/* Badge 1/2 */}
-                                {isSelected && (
-                                    <span className="pres-badge" style={{ background: pres.color }}>
-                                        {selIndex === 0 ? '1' : '2'}
-                                    </span>
-                                )}
-                                <img src={pres.photo} alt={pres.displayName} className="pres-mini-photo" />
-                                <span className="pres-mini-name">{pres.displayName}</span>
-                                <span className="pres-mini-period">{pres.period}</span>
-                            </div>
-                        );
-                    })}
+                <div className="pres-selector-wrapper">
+                    <div className="scroll-arrow scroll-left">‹</div>
+                    <div className="pres-selector-row">
+                        {PRESIDENTS.map((pres, idx) => {
+                            const isSelected = selectedKeys.includes(pres.key);
+                            const selIndex = selectedKeys.indexOf(pres.key); // 0 o 1
+                            const isDimmed = hasTwoSelected && !isSelected;
+                            const isBlocked = !isSelected && selectedKeys.length === 2;
+                            return (
+                                <div
+                                    key={pres.key}
+                                    className={`pres-mini-card ${isSelected ? 'pres-selected' : ''} ${isDimmed ? 'pres-dimmed' : ''} ${isBlocked ? 'pres-blocked' : ''}`}
+                                    style={{ '--card-color': pres.color, '--card-glow': pres.color + '30' }}
+                                    onClick={() => handlePresidentClick(pres.key)}
+                                    title={isBlocked ? 'Deselecciona un presidente primero' : pres.displayName}
+                                >
+                                    {/* Badge 1/2 */}
+                                    {isSelected && (
+                                        <span className="pres-badge" style={{ background: pres.color }}>
+                                            {selIndex === 0 ? '1' : '2'}
+                                        </span>
+                                    )}
+                                    <img src={pres.photo} alt={pres.displayName} className="pres-mini-photo" />
+                                    <span className="pres-mini-name">{pres.displayName}</span>
+                                    <span className="pres-mini-period">{pres.period}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className="scroll-arrow scroll-right">›</div>
                 </div>
 
                 {/* ── HERO ARENA — Empty State Cinematográfico ── */}

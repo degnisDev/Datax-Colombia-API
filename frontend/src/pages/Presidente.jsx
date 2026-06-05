@@ -262,7 +262,14 @@ export default function Presidente() {
                 </header>
 
                 {/* Grid de Presidentes (siempre visible) */}
-                <div className="president-grid">
+                <div className={`president-grid ${selectedKey ? 'has-active' : ''}`}>
+                    {selectedKey && (
+                        <div className="mobile-show-all-wrapper">
+                            <button className="mobile-show-all-btn" onClick={() => setSelectedKey(null)}>
+                                👁 Mostrar todos
+                            </button>
+                        </div>
+                    )}
                     {PRESIDENTS.map(pres => {
                         const isSelected = selectedKey === pres.key;
                         const isDimmed = selectedKey && !isSelected;

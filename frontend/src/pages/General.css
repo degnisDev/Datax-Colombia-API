@@ -168,14 +168,76 @@
 
 /* ---- PANEL DEL GRÁFICO ---- */
 .main-chart-container {
-  height: 420px;
+  min-height: 450px;
+  height: auto;
   display: flex;
-  flex-direction: column; /* Cambiado a column para que el título y la gráfica bajen juntos */
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  margin-top: 50px; /* Más espacio respecto a las cards */
-  padding-top: 20px;
+  margin-top: 80px; 
+  margin-bottom: 50px; /* Evita que monte el footer */
+  padding: 20px 10px;
+  position: relative;
+  z-index: 1; /* Bajamos el z-index para que no se sobreponga a las tarjetas */
+}
+
+/* ---- MOBILE SPECIFIC ---- */
+.mobile-instruction {
+  display: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+.mobile-show-all-wrapper {
+  display: none;
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.mobile-show-all-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .glow-text { font-size: 2rem; }
+  .mobile-instruction { display: block; }
+  
+  /* En móviles, si hay una card activa, oculta las demás */
+  .kpi-grid.has-active .kpi-card:not(.kpi-active) {
+    display: none;
+  }
+  .kpi-grid.has-active .mobile-show-all-wrapper {
+    display: block;
+  }
+  .kpi-grid.has-active {
+    grid-template-columns: 1fr; /* Solo la tarjeta activa ocupando todo */
+  }
+
+  /* Ajustes a la tarjeta en movil para que quepan 2 */
+  .kpi-card { padding: 15px 12px; }
+  .kpi-label { font-size: 1rem; margin-bottom: 8px; }
+  .kpi-value { font-size: 1.4rem; }
+  .kpi-unit { font-size: 0.8rem; }
+  .kpi-desc { font-size: 0.7rem; }
+
+  /* Reducir el espacio entre la tarjeta y la gráfica en móviles */
+  .main-chart-container {
+    margin-top: 1rem;
+  }
 }
 
 /* ---- PANTALLA DE CARGA ---- */

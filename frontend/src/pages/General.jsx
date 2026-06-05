@@ -71,15 +71,22 @@ export default function General() {
             <div className="hero-background general-bg"></div>
 
             <div className="dashboard-container">
-                {/* Header */}
                 <header className="dashboard-header">
                     <span className="dashboard-badge">1990 — 2025</span>
                     <h1 className="glow-text">DASHBOARD GENERAL</h1>
                     <p className="dashboard-subtitle">Indicadores macroeconómicos consolidados · {data.length} años de historia</p>
+                    <p className="mobile-instruction">Selecciona un indicador</p>
                 </header>
 
                 {/* Grid de 9 KPI Cards con datos reales */}
-                <div className="kpi-grid">
+                <div className={`kpi-grid ${activeKpi ? 'has-active' : ''}`}>
+                    {activeKpi && (
+                        <div className="mobile-show-all-wrapper">
+                            <button className="mobile-show-all-btn" onClick={() => setActiveKpi(null)}>
+                                👁 Mostrar todos
+                            </button>
+                        </div>
+                    )}
                     {KPI_CONFIG.map(kpi => {
                         const value = avg(data, kpi.key);
                         const isActive = activeKpi === kpi.key;
