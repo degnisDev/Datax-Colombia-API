@@ -6,8 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # ---- App ----
 app = FastAPI(
-    title="CGD API",
-    description="Colombian Government Data API"
+    title="Datax Colombia API",
+    description="API Pública de Datos Macroeconómicos y Presidenciales de Colombia (1990-2025)",
+    version="1.0.0"
 )
 
 # ---- CORS (permisos para que el frontend se conecte) ----
@@ -86,7 +87,8 @@ TRANSITIONS = {
 @app.get("/")
 def read_root():
     return {
-        "mensaje": "Bienvenido a la API de CGD (Colombia Government Data)",
+        "mensaje": "Bienvenido a la API Pública de Datax Colombia",
+        "documentacion": "Visita /docs para ver los endpoints interactivos",
         "estado": "Carga de datos exitosa",
         "columnas_detectadas": list(df.columns)
     }

@@ -153,7 +153,7 @@ function CompCard({ kpi, presA, presB, rowsA, rowsB }) {
                         className="comp-card-winner-badge"
                         style={{ background: (winner === 'A' ? presA.color : presB.color) + '25', color: winner === 'A' ? presA.color : presB.color, border: `1px solid ${winner === 'A' ? presA.color : presB.color}40` }}
                     >
-                        Mejor: {winner === 'A' ? presA.displayName.split(' ')[0] : presB.displayName.split(' ')[0]}
+                        {kpi.key === 'Presupuesto_Total_COP' ? 'Mayor' : 'Mejor'}: {winner === 'A' ? presA.displayName.split(' ')[0] : presB.displayName.split(' ')[0]}
                     </span>
                 )}
             </div>
@@ -385,7 +385,7 @@ export default function Comparativo() {
                         <div className="arena-vignette" />
                         <div className="arena-scanlines" />
                         <div className="arena-overlay">
-                            <span className="arena-title-top">COLOMBIA DATA</span>
+                            <span className="arena-title-top">DATAX COLOMBIA</span>
                             <span className="arena-title-main">CHOOSE YOUR FIGHTERS</span>
                             <span className="arena-title-sub">Selecciona 2 presidentes arriba para iniciar el duelo</span>
                         </div>

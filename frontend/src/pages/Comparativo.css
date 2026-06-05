@@ -699,9 +699,9 @@
   flex: 1;
 }
 .comp-card-winner-badge {
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 3px 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 5px 14px;
   border-radius: 100px;
 }
 

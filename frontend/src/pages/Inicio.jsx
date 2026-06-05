@@ -29,7 +29,7 @@ export default function Inicio() {
             }}>
                 <div className="hero-text" style={{ textAlign: 'center', zIndex: 10, padding: '0 20px' }}>
                     <h1 className="glow-title text-shadow-epic inicio-title" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', letterSpacing: 'clamp(2px, 1vw, 5px)' }}>
-                        DATA'S COLOMBIA
+                        DATAX COLOMBIA
                     </h1>
                     <p className="subtitle text-shadow-epic inicio-subtitle" style={{
                         color: 'var(--colombia-yellow)',
