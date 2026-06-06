@@ -20,9 +20,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+import os
+
 # ---- 1. CARGA DE DATOS ----
-# Ruta relativa a la raíz del proyecto (donde se ejecuta uvicorn)
-df = pd.read_csv("data/colombia_macro_annual.csv").fillna(0)
+# Resolviendo la ruta de forma dinámica para que funcione tanto en local como en Render
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Subimos dos niveles (de app/ a backend/ a la raíz) y entramos a data/
+DATA_PATH = os.path.join(BASE_DIR, "..", "..", "data", "colombia_macro_annual.csv")
+
+df = pd.read_csv(DATA_PATH).fillna(0)
 
 
 # ---- 2. MODELO DE DATOS (ESQUEMA) ----
